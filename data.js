@@ -1,28 +1,29 @@
+// SONG
 let song = document.querySelector("#song");
-let songInfo = document.querySelector("#header-container");
+let songInfo = document.querySelector("#song-info");
 let songs = document.getElementsByClassName("songs");
-
+// COUNTER
 let timerContainer = document.querySelector("#timer-container");
-let songCurrentTime = document.querySelector("#time-current");
-let songTotalTime = document.querySelector("#time-total");
+let songCurrentTime = document.querySelector("#song-current-time");
+let songTotalTime = document.querySelector("#song-total-time");
 let counterCurrentTime;
 let counterTotalTime;
-
+// PLAYLIST AND PROGRESS BAR
 let playlistContainer = document.querySelector("#playlist-container");
-
 let progressBar = document.querySelector("#progress-bar");
-let progressBarInput = document.querySelector("#input-progress-bar");
-
+let progressBarInput = document.querySelector("#progress-bar-input");
+// CONTROLS
 let prevSong = document.querySelector("#prev-song");
 let playSong = document.querySelector("#play-song");
 let nextSong = document.querySelector("#next-song");
 let repeatSong = document.querySelector("#repeat-song");
+// FOOTER
+let footerContainer = document.getElementById("footer-container");
 
 let buttonRepeatState = false;
 let index = 0;
 
-let footerContainer = document.getElementById("footer-container");
-
+// SONGS DATA
 const songList = [
     {
         title: "Keep My Spirit Alive",
