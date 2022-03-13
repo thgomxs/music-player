@@ -16,6 +16,7 @@ let progressBar = document.querySelector("#progress-bar");
 let progressBarInput = document.querySelector("#progress-bar-input");
 // CONTROLS
 let playerContainer = document.querySelector("#player-container");
+let shuffleSong = document.querySelector("#shuffle-song");
 let prevSong = document.querySelector("#prev-song");
 let playSong = document.querySelector("#play-song");
 let nextSong = document.querySelector("#next-song");
@@ -26,6 +27,7 @@ let footerContainer = document.getElementById("footer-container");
 
 let darkMode = document.querySelector("#dark-mode");
 let buttonDarkModeState = false;
+let buttonShuffleState = false;
 let buttonRepeatState = false;
 let buttonExpandState = false;
 let index = 0;

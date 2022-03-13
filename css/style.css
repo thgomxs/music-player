@@ -323,7 +323,7 @@ body {
     margin-top: 7px;
 }
 
-.repeat-hover {
+.button-activated {
     background-color: rgba(129, 129, 129, 0.438);
     padding: 2px 2px;
 }

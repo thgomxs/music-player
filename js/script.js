@@ -3,8 +3,6 @@ song.addEventListener("ended", skipForNextSong);
 progressBarInput.addEventListener("change", progressAudioTimeManually);
 footerContainer.addEventListener("mouseover", showFooterContainer);
 
-console.log(window.matchMedia("(prefers-color-scheme: dark)").matches);
-
 onload = function () {
     for (let i = 0; i < songList.length; i++) {
         playlistContainer.innerHTML += `<section class="songs cent">
@@ -32,14 +30,12 @@ onload = function () {
 darkMode.addEventListener("click", enableDarkMode);
 function enableDarkMode() {
     if (buttonDarkModeState == false && window.matchMedia("(prefers-color-scheme: dark)").matches == true) {
-        console.log("ëu");
         html.classList.add("dark-mode");
         buttonDarkModeState = true;
         darkMode.innerHTML = "<p>Swap for</p> LIGHT MODE";
         return;
     }
     if (buttonDarkModeState == true) {
-        console.log("ëu");
         html.classList.remove("dark-mode");
         buttonDarkModeState = false;
         darkMode.innerHTML = "<p>Swap for</p> DARK MODE";
@@ -106,6 +102,29 @@ function progressBarWidth() {
     progressBar.style.width = `${width}%`;
 }
 
+shuffleSong.addEventListener("click", shuffleSongFunction);
+function shuffleSongFunction() {
+    if (buttonShuffleState === false) {
+        buttonShuffleState = true;
+        buttonRepeatState = true;
+        repeatSongFunction();
+        shuffleSong.classList.add("button-activated");
+        song.addEventListener("timeupdate", function () {
+            if (song.currentTime === song.duration) {
+                numSongs = songList.length;
+                nextRandomSong = Math.floor(Math.random() * numSongs);
+                index = nextRandomSong;
+                console.log(index);
+            }
+        });
+        return;
+    }
+    if (buttonShuffleState === true) {
+        buttonShuffleState = false;
+        shuffleSong.classList.remove("button-activated");
+    }
+}
+
 prevSong.addEventListener("click", skipForPrevSong);
 function skipForPrevSong() {
     if (index === 0) {
@@ -140,7 +159,7 @@ playSong.addEventListener("click", function () {
 
 nextSong.addEventListener("click", skipForNextSong);
 function skipForNextSong() {
-    if (buttonRepeatState == false) {
+    if (buttonRepeatState == false && buttonShuffleState == false) {
         index++;
         if (index === songList.length) {
             index = 0;
@@ -149,14 +168,26 @@ function skipForNextSong() {
         infoSong();
         playSong.setAttribute("src", "./assets/images/pause.png");
         song.play();
-        // return;
+        return;
+    }
+    if (buttonRepeatState == false && buttonShuffleState == true) {
+        if (index === songList.length) {
+            index = 0;
+        }
+        song.src = songList[index].src;
+        infoSong();
+        playSong.setAttribute("src", "./assets/images/pause.png");
+        song.play();
     }
 }
 
-repeatSong.addEventListener("click", function () {
-    if (repeatSong.classList.contains("repeat-hover") === false && buttonRepeatState === false) {
+repeatSong.addEventListener("click", repeatSongFunction);
+function repeatSongFunction() {
+    if (buttonRepeatState === false) {
         buttonRepeatState = true;
-        repeatSong.classList.add("repeat-hover");
+        buttonShuffleState = true;
+        shuffleSongFunction();
+        repeatSong.classList.add("button-activated");
         song.addEventListener("timeupdate", function () {
             if (song.currentTime === song.duration && buttonRepeatState === true) {
                 song.currentTime = 0;
@@ -166,12 +197,11 @@ repeatSong.addEventListener("click", function () {
         return;
     }
 
-    if (repeatSong.classList.contains("repeat-hover") === true && buttonRepeatState === true) {
+    if (buttonRepeatState === true) {
         buttonRepeatState = false;
-        repeatSong.classList.remove("repeat-hover");
-        // return;
+        repeatSong.classList.remove("button-activated");
     }
-});
+}
 
 expandSong.addEventListener("click", function () {
     if (buttonExpandState == false) {
@@ -181,7 +211,6 @@ expandSong.addEventListener("click", function () {
         expandSong.src = "./assets/images/minimize.png";
         songInfo.style.display = "flex";
         buttonExpandState = true;
-        console.log("eu");
         return;
     }
     if (buttonExpandState == true) {
@@ -191,7 +220,6 @@ expandSong.addEventListener("click", function () {
         expandSong.src = "./assets/images/expand.png";
         songInfo.style.display = "none";
         buttonExpandState = false;
-        return;
     }
 });
 
