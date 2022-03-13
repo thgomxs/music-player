@@ -1,9 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Poppins:wght@300&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 62.5%;
     font-family: "Poppins", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--text-color);
+    border-radius: 5px;
 }
 :root {
     --body-bg: rgb(39, 36, 36);
@@ -97,10 +107,9 @@ body {
 }
 #playlist-container .songs {
     justify-content: flex-start;
-    min-width: 350px;
-    max-width: 350px;
+    width: 400px;
     padding: 10px;
-    margin: 10px 50px;
+    margin: 10px 0px 10px 50px;
     border-radius: 10px;
     transition: 500ms;
 }
@@ -109,7 +118,8 @@ body {
     background-color: var(--songs-bg-hover);
 }
 #playlist-container .cover {
-    width: 60px;
+    border-radius: 2px;
+    width: 55px;
 }
 #playlist-container .songs .song-info {
     position: relative;
@@ -117,21 +127,22 @@ body {
     align-items: flex-start;
 }
 #playlist-container .songs .song-info h1 {
+    overflow: hidden;
     position: absolute;
-    width: 250px;
+    width: 300px;
     left: 110%;
-    top: 15%;
-    line-height: 25px;
-    font-size: 2.5rem;
+    top: 5%;
+    line-height: 35px;
+    font-size: 2.1rem;
 }
 #playlist-container .songs .song-info p {
     position: absolute;
     left: 112%;
-    top: 53%;
+    top: 50%;
     width: 250px;
     margin-top: 3px;
     line-height: 15px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 #player-container {
@@ -151,11 +162,11 @@ body {
     margin-bottom: 8px;
 }
 #song-info h1 {
-    font-size: 2.25rem;
+    font-size: 1.9rem;
     font-weight: bold;
 }
 #song-info p {
-    font-size: 1.7rem;
+    font-size: 1.45rem;
     font-weight: 600;
 }
 
@@ -247,12 +258,12 @@ body {
 #player-container #expand-song {
     display: none;
     position: absolute;
-    top: 5%;
+    top: 10%;
     right: 5%;
     width: 30px;
     padding: 3px;
     border-radius: 50%;
-    background-color: #b4b3b3;
+    filter: var(--controlsButtons-bg);
 }
 
 #footer-container {
@@ -367,14 +378,14 @@ img {
         width: 100%;
     }
     #song-info img {
-        width: 65vw;
+        width: 450px;
     }
     #progress-container {
-        width: 65vw;
+        width: 450px;
         margin-bottom: 30px;
     }
     #timer-container {
-        width: 65vw;
+        width: 450px;
         margin-top: 5px;
         position: static;
     }
@@ -406,6 +417,20 @@ img {
 @media (max-width: 920px) {
     #song-info {
         display: none;
+    }
+}
+@media (max-width: 650px) {
+    #song-info img {
+        width: 250px;
+    }
+    #progress-container {
+        width: 250px;
+    }
+    #timer-container {
+        width: 250px;
+    }
+    #playlist-container .songs {
+        width: 350px;
     }
 }
 @media (max-width: 520px) {

@@ -1,4 +1,3 @@
-// song.addEventListener("loadeddata", progressAudioTimeManually);
 song.addEventListener("timeupdate", progressBarWidth);
 song.addEventListener("ended", skipForNextSong);
 progressBarInput.addEventListener("change", progressAudioTimeManually);
@@ -31,7 +30,6 @@ onload = function () {
 };
 
 darkMode.addEventListener("click", enableDarkMode);
-
 function enableDarkMode() {
     if (buttonDarkModeState == false && window.matchMedia("(prefers-color-scheme: dark)").matches == true) {
         console.log("ëu");
@@ -90,7 +88,7 @@ function playSelectedSong() {
     songInfo.children[0].setAttribute("width", "250px");
 
     if (song.paused && song.currentTime === 0) {
-        playSong.setAttribute("src", "./assets/pause.png");
+        playSong.setAttribute("src", "./assets/images/pause.png");
         song.play();
         return;
     }
@@ -120,7 +118,7 @@ function skipForPrevSong() {
         index--;
         song.src = songList[index].src;
         infoSong();
-        playSong.setAttribute("src", "./assets/pause.png");
+        playSong.setAttribute("src", "./assets/images/pause.png");
         song.play();
         // return;
     }
@@ -128,14 +126,14 @@ function skipForPrevSong() {
 
 playSong.addEventListener("click", function () {
     if (song.paused) {
-        playSong.setAttribute("src", "./assets/pause.png");
+        playSong.setAttribute("src", "./assets/images/pause.png");
         progressBarInput.setAttribute("max", `${song.duration * 1000}`);
         song.play();
         return;
     }
 
     if (!song.paused) {
-        playSong.setAttribute("src", "./assets/play.png");
+        playSong.setAttribute("src", "./assets/images/play.png");
         song.pause();
     }
 });
@@ -149,7 +147,7 @@ function skipForNextSong() {
         }
         song.src = songList[index].src;
         infoSong();
-        playSong.setAttribute("src", "./assets/pause.png");
+        playSong.setAttribute("src", "./assets/images/pause.png");
         song.play();
         // return;
     }
@@ -180,7 +178,7 @@ expandSong.addEventListener("click", function () {
         playerContainer.style.flexDirection = "column";
         playerContainer.style.height = "80vh";
         progressContainer.style.marginBottom = "0px";
-        expandSong.src = "./assets/minimize.png";
+        expandSong.src = "./assets/images/minimize.png";
         songInfo.style.display = "flex";
         buttonExpandState = true;
         console.log("eu");
@@ -190,7 +188,7 @@ expandSong.addEventListener("click", function () {
         playerContainer.style.flexDirection = "column-reverse";
         playerContainer.style.height = "95px";
         progressContainer.style.marginBottom = "30px";
-        expandSong.src = "./assets/expand.png";
+        expandSong.src = "./assets/images/expand.png";
         songInfo.style.display = "none";
         buttonExpandState = false;
         return;
