@@ -4,6 +4,8 @@ song.addEventListener("ended", skipForNextSong);
 progressBarInput.addEventListener("change", progressAudioTimeManually);
 footerContainer.addEventListener("mouseover", showFooterContainer);
 
+console.log(window.matchMedia("(prefers-color-scheme: dark)").matches);
+
 onload = function () {
     for (let i = 0; i < songList.length; i++) {
         playlistContainer.innerHTML += `<section class="songs cent">
@@ -24,7 +26,27 @@ onload = function () {
     for (let s of songs) {
         s.addEventListener("click", playSelectedSong);
     }
+
+    enableDarkMode();
 };
+
+darkMode.addEventListener("click", enableDarkMode);
+
+function enableDarkMode() {
+    if (buttonDarkModeState == false && window.matchMedia("(prefers-color-scheme: dark)").matches == true) {
+        console.log("ëu");
+        html.classList.add("dark-mode");
+        buttonDarkModeState = true;
+        darkMode.innerHTML = "<p>Swap for</p> LIGHT MODE";
+        return;
+    }
+    if (buttonDarkModeState == true) {
+        console.log("ëu");
+        html.classList.remove("dark-mode");
+        buttonDarkModeState = false;
+        darkMode.innerHTML = "<p>Swap for</p> DARK MODE";
+    }
+}
 
 function infoSong() {
     song.src = songList[index].src;
@@ -134,9 +156,9 @@ function skipForNextSong() {
 }
 
 repeatSong.addEventListener("click", function () {
-    if (repeatSong.classList.contains("repeatHover") === false && buttonRepeatState === false) {
+    if (repeatSong.classList.contains("repeat-hover") === false && buttonRepeatState === false) {
         buttonRepeatState = true;
-        repeatSong.classList.add("repeatHover");
+        repeatSong.classList.add("repeat-hover");
         song.addEventListener("timeupdate", function () {
             if (song.currentTime === song.duration && buttonRepeatState === true) {
                 song.currentTime = 0;
@@ -146,10 +168,32 @@ repeatSong.addEventListener("click", function () {
         return;
     }
 
-    if (repeatSong.classList.contains("repeatHover") === true && buttonRepeatState === true) {
+    if (repeatSong.classList.contains("repeat-hover") === true && buttonRepeatState === true) {
         buttonRepeatState = false;
-        repeatSong.classList.remove("repeatHover");
+        repeatSong.classList.remove("repeat-hover");
         // return;
+    }
+});
+
+expandSong.addEventListener("click", function () {
+    if (buttonExpandState == false) {
+        playerContainer.style.flexDirection = "column";
+        playerContainer.style.height = "80vh";
+        progressContainer.style.marginBottom = "0px";
+        expandSong.src = "./assets/minimize.png";
+        songInfo.style.display = "flex";
+        buttonExpandState = true;
+        console.log("eu");
+        return;
+    }
+    if (buttonExpandState == true) {
+        playerContainer.style.flexDirection = "column-reverse";
+        playerContainer.style.height = "95px";
+        progressContainer.style.marginBottom = "30px";
+        expandSong.src = "./assets/expand.png";
+        songInfo.style.display = "none";
+        buttonExpandState = false;
+        return;
     }
 });
 

@@ -1,3 +1,4 @@
+let html = document.querySelector("html");
 // SONG
 let song = document.querySelector("#song");
 let songInfo = document.querySelector("#song-info");
@@ -10,17 +11,23 @@ let counterCurrentTime;
 let counterTotalTime;
 // PLAYLIST AND PROGRESS BAR
 let playlistContainer = document.querySelector("#playlist-container");
+let progressContainer = document.querySelector("#progress-container");
 let progressBar = document.querySelector("#progress-bar");
 let progressBarInput = document.querySelector("#progress-bar-input");
 // CONTROLS
+let playerContainer = document.querySelector("#player-container");
 let prevSong = document.querySelector("#prev-song");
 let playSong = document.querySelector("#play-song");
 let nextSong = document.querySelector("#next-song");
 let repeatSong = document.querySelector("#repeat-song");
+let expandSong = document.querySelector("#expand-song");
 // FOOTER
 let footerContainer = document.getElementById("footer-container");
 
+let darkMode = document.querySelector("#dark-mode");
+let buttonDarkModeState = false;
 let buttonRepeatState = false;
+let buttonExpandState = false;
 let index = 0;
 
 // SONGS DATA
