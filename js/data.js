@@ -24,12 +24,14 @@ let repeatSong = document.querySelector("#repeat-song");
 let expandSong = document.querySelector("#expand-song");
 // FOOTER
 let footerContainer = document.getElementById("footer-container");
-
+// DARK MODE
 let darkMode = document.querySelector("#dark-mode");
+// BUTTON ACTIVATORS
 let buttonDarkModeState = false;
 let buttonShuffleState = false;
 let buttonRepeatState = false;
 let buttonExpandState = false;
+// INDEX = MUSIC NUMBER POSITION IN ARRAY
 let index = 0;
 
 // SONGS DATA
