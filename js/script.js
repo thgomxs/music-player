@@ -212,7 +212,7 @@ expandSong.addEventListener("click", function () {
     if (buttonExpandState == false) {
         playerContainer.style.flexDirection = "column";
         playerContainer.style.height = "80vh";
-        progressContainer.style.marginBottom = "0px";
+        progressContainer.style.marginBottom = "10px";
         expandSong.src = "./assets/images/minimize.png";
         songInfo.style.display = "flex";
         buttonExpandState = true;
@@ -221,7 +221,7 @@ expandSong.addEventListener("click", function () {
     if (buttonExpandState == true) {
         playerContainer.style.flexDirection = "column-reverse";
         playerContainer.style.height = "95px";
-        progressContainer.style.marginBottom = "30px";
+        progressContainer.style.marginBottom = "20px";
         expandSong.src = "./assets/images/expand.png";
         songInfo.style.display = "none";
         buttonExpandState = false;
