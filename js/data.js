@@ -14,23 +14,22 @@ let playlistContainer = document.querySelector("#playlist-container");
 let progressContainer = document.querySelector("#progress-container");
 let progressBar = document.querySelector("#progress-bar");
 let progressBarInput = document.querySelector("#progress-bar-input");
-// CONTROLS
+// CONTROLS BUTTONS
 let playerContainer = document.querySelector("#player-container");
-let shuffleSong = document.querySelector("#shuffle-song");
-let prevSong = document.querySelector("#prev-song");
-let playSong = document.querySelector("#play-song");
-let nextSong = document.querySelector("#next-song");
-let repeatSong = document.querySelector("#repeat-song");
-let expandSong = document.querySelector("#expand-song");
-// FOOTER
-let footerContainer = document.getElementById("footer-container");
-// DARK MODE
-let darkMode = document.querySelector("#dark-mode");
-// BUTTON ACTIVATORS
+let shuffleSongBtn = document.querySelector("#shuffle-song");
+let prevSongBtn = document.querySelector("#prev-song");
+let playSongBtn = document.querySelector("#play-song");
+let nextSongBtn = document.querySelector("#next-song");
+let repeatSongBtn = document.querySelector("#repeat-song");
+let expandSongBtn = document.querySelector("#expand-song");
+let darkModeBtn = document.querySelector("#dark-mode");
+// BUTTONS STATES
 let buttonDarkModeState = false;
 let buttonShuffleState = false;
 let buttonRepeatState = false;
 let buttonExpandState = false;
+// FOOTER
+let footerContainer = document.getElementById("footer-container");
 // INDEX = MUSIC NUMBER POSITION IN ARRAY
 let index = 0;
 

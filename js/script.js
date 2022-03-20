@@ -17,29 +17,28 @@ onload = function () {
         s.addEventListener("click", playSelectedSong);
     }
 
-    infoSong();
+    loadSong();
     startSongCounter();
     enableDarkMode();
 };
 
 // ENABLE AND DISABLE DARK MODE FUNCTION
-darkMode.addEventListener("click", enableDarkMode);
 function enableDarkMode() {
     if (buttonDarkModeState == false && window.matchMedia("(prefers-color-scheme: dark)").matches == true) {
         html.classList.add("dark-mode");
         buttonDarkModeState = true;
-        darkMode.innerHTML = "<p>Swap for</p> LIGHT MODE";
+        darkModeBtn.innerHTML = "<p>Swap for</p> LIGHT MODE";
         return;
     }
     if (buttonDarkModeState == true) {
         html.classList.remove("dark-mode");
         buttonDarkModeState = false;
-        darkMode.innerHTML = "<p>Swap for</p> DARK MODE";
+        darkModeBtn.innerHTML = "<p>Swap for</p> DARK MODE";
     }
 }
 
 // LOAD SONG INFORMATION
-function infoSong() {
+function loadSong() {
     song.src = songList[index].src;
     songInfo.children[0].src = songList[index].cover;
     songInfo.children[1].innerHTML = songList[index].title;
@@ -70,23 +69,15 @@ function startSongCounter() {
 
 // PLAY SELECTED SONG BY USER
 function playSelectedSong() {
-    let songSelected = this.children[1].src;
-    let songSelectedInfo = this.children[0].innerHTML;
-
     const indexNumber = songList.findIndex((currObj) => {
         return currObj.title === this.children[0].children[1].innerHTML;
     });
     index = indexNumber;
 
-    song.src = songSelected;
-    song.pause();
-    song.currentTime = 0;
-    console.log(songSelectedInfo);
-    songInfo.innerHTML = songSelectedInfo;
-    songInfo.children[0].setAttribute("width", "250px");
+    loadSong();
 
     if (song.paused && song.currentTime === 0) {
-        playSong.setAttribute("src", "./assets/images/pause.png");
+        playSongBtn.setAttribute("src", "./assets/images/pause.png");
         song.play();
         return;
     }
@@ -106,22 +97,21 @@ function progressBarWidth() {
 }
 
 // PLAY AND PAUSE FUNCTION
-playSong.addEventListener("click", function () {
+function playAndPauseSong() {
     if (song.paused) {
-        playSong.setAttribute("src", "./assets/images/pause.png");
+        playSongBtn.setAttribute("src", "./assets/images/pause.png");
         progressBarInput.setAttribute("max", `${song.duration * 1000}`);
         song.play();
         return;
     }
 
     if (!song.paused) {
-        playSong.setAttribute("src", "./assets/images/play.png");
+        playSongBtn.setAttribute("src", "./assets/images/play.png");
         song.pause();
     }
-});
+}
 
 // PREVIOUS AND NEXT SONG FUNCTIONS
-prevSong.addEventListener("click", skipForPrevSong);
 function skipForPrevSong() {
     if (index === 0) {
         index = songList.length;
@@ -132,22 +122,21 @@ function skipForPrevSong() {
     if (index > 0) {
         index--;
         song.src = songList[index].src;
-        infoSong();
-        playSong.setAttribute("src", "./assets/images/pause.png");
+        loadSong();
+        playSongBtn.setAttribute("src", "./assets/images/pause.png");
         song.play();
-        // return;
     }
 }
-nextSong.addEventListener("click", skipForNextSong);
 function skipForNextSong() {
     if (buttonRepeatState == false && buttonShuffleState == false) {
         index++;
         if (index === songList.length) {
             index = 0;
         }
+        console.log("eu");
         song.src = songList[index].src;
-        infoSong();
-        playSong.setAttribute("src", "./assets/images/pause.png");
+        loadSong();
+        playSongBtn.setAttribute("src", "./assets/images/pause.png");
         song.play();
         return;
     }
@@ -156,45 +145,49 @@ function skipForNextSong() {
             index = 0;
         }
         song.src = songList[index].src;
-        infoSong();
-        playSong.setAttribute("src", "./assets/images/pause.png");
+        loadSong();
+        playSongBtn.setAttribute("src", "./assets/images/pause.png");
         song.play();
     }
 }
 
 // SHUFFLE AND REPEAT FUNCTIONS
-shuffleSong.addEventListener("click", shuffleSongFunction);
 function shuffleSongFunction() {
     if (buttonShuffleState === false) {
+        song.addEventListener("ended", function shuffle() {
+            if (shuffleSongBtn.classList.contains("button-activated")) {
+                numSongs = songList.length;
+                nextRandomSong = Math.floor(Math.random() * numSongs);
+                console.log("shuffle");
+                index = nextRandomSong;
+                return;
+            } else {
+                song.removeEventListener("ended", shuffle);
+                song.addEventListener("ended", skipForNextSong);
+            }
+        });
+
         buttonShuffleState = true;
         buttonRepeatState = true;
         repeatSongFunction();
-        shuffleSong.classList.add("button-activated");
-        song.addEventListener("timeupdate", function () {
-            if (song.currentTime === song.duration) {
-                numSongs = songList.length;
-                nextRandomSong = Math.floor(Math.random() * numSongs);
-                index = nextRandomSong;
-                console.log(index);
-            }
-        });
+        shuffleSongBtn.classList.add("button-activated");
         return;
     }
     if (buttonShuffleState === true) {
+        shuffleSongBtn.classList.remove("button-activated");
         buttonShuffleState = false;
-        shuffleSong.classList.remove("button-activated");
     }
 }
-repeatSong.addEventListener("click", repeatSongFunction);
 function repeatSongFunction() {
     if (buttonRepeatState === false) {
         buttonRepeatState = true;
         buttonShuffleState = true;
         shuffleSongFunction();
-        repeatSong.classList.add("button-activated");
+        repeatSongBtn.classList.add("button-activated");
         song.addEventListener("timeupdate", function () {
             if (song.currentTime === song.duration && buttonRepeatState === true) {
                 song.currentTime = 0;
+                console.log("repeat");
                 song.play();
             }
         });
@@ -202,18 +195,18 @@ function repeatSongFunction() {
     }
 
     if (buttonRepeatState === true) {
+        repeatSongBtn.classList.remove("button-activated");
         buttonRepeatState = false;
-        repeatSong.classList.remove("button-activated");
     }
 }
 
 // EXPAND SONG IN MOBILE
-expandSong.addEventListener("click", function () {
+expandSongBtn.addEventListener("click", function () {
     if (buttonExpandState == false) {
         playerContainer.style.flexDirection = "column";
         playerContainer.style.height = "80vh";
         progressContainer.style.marginBottom = "10px";
-        expandSong.src = "./assets/images/minimize.png";
+        expandSongBtn.src = "./assets/images/minimize.png";
         songInfo.style.display = "flex";
         buttonExpandState = true;
         return;
@@ -222,7 +215,7 @@ expandSong.addEventListener("click", function () {
         playerContainer.style.flexDirection = "column-reverse";
         playerContainer.style.height = "95px";
         progressContainer.style.marginBottom = "20px";
-        expandSong.src = "./assets/images/expand.png";
+        expandSongBtn.src = "./assets/images/expand.png";
         songInfo.style.display = "none";
         buttonExpandState = false;
     }
@@ -240,3 +233,11 @@ song.addEventListener("timeupdate", progressBarWidth);
 song.addEventListener("ended", skipForNextSong);
 progressBarInput.addEventListener("change", progressAudioTimeManually);
 footerContainer.addEventListener("mouseover", showFooterContainer);
+
+darkModeBtn.addEventListener("click", enableDarkMode);
+
+playSongBtn.addEventListener("click", playAndPauseSong);
+prevSongBtn.addEventListener("click", skipForPrevSong);
+nextSongBtn.addEventListener("click", skipForNextSong);
+shuffleSongBtn.addEventListener("click", shuffleSongFunction);
+repeatSongBtn.addEventListener("click", repeatSongFunction);
