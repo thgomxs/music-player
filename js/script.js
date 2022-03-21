@@ -128,49 +128,42 @@ function skipForPrevSong() {
     }
 }
 function skipForNextSong() {
-    if (buttonRepeatState == false && buttonShuffleState == false) {
+    if (buttonShuffleState == false) {
         index++;
-        if (index === songList.length) {
-            index = 0;
-        }
-        console.log("eu");
-        song.src = songList[index].src;
-        loadSong();
-        playSongBtn.setAttribute("src", "./assets/images/pause.png");
-        song.play();
-        return;
+    } else if (buttonShuffleState == true) {
     }
-    if (buttonRepeatState == false && buttonShuffleState == true) {
-        if (index === songList.length) {
-            index = 0;
-        }
-        song.src = songList[index].src;
-        loadSong();
-        playSongBtn.setAttribute("src", "./assets/images/pause.png");
-        song.play();
+    if (index === songList.length) {
+        index = 0;
     }
+    console.log("eu");
+    song.src = songList[index].src;
+    loadSong();
+    playSongBtn.setAttribute("src", "./assets/images/pause.png");
+    song.play();
 }
 
 // SHUFFLE AND REPEAT FUNCTIONS
 function shuffleSongFunction() {
     if (buttonShuffleState === false) {
+        buttonShuffleState = true;
+        buttonRepeatState = true;
+        repeatSongFunction();
+
+        shuffleSongBtn.classList.add("button-activated");
+        song.removeEventListener("ended", skipForNextSong);
         song.addEventListener("ended", function shuffle() {
             if (shuffleSongBtn.classList.contains("button-activated")) {
                 numSongs = songList.length;
                 nextRandomSong = Math.floor(Math.random() * numSongs);
                 console.log("shuffle");
                 index = nextRandomSong;
-                return;
+                console.log(index);
+                skipForNextSong();
             } else {
                 song.removeEventListener("ended", shuffle);
                 song.addEventListener("ended", skipForNextSong);
             }
         });
-
-        buttonShuffleState = true;
-        buttonRepeatState = true;
-        repeatSongFunction();
-        shuffleSongBtn.classList.add("button-activated");
         return;
     }
     if (buttonShuffleState === true) {
@@ -183,12 +176,16 @@ function repeatSongFunction() {
         buttonRepeatState = true;
         buttonShuffleState = true;
         shuffleSongFunction();
+
         repeatSongBtn.classList.add("button-activated");
-        song.addEventListener("timeupdate", function () {
-            if (song.currentTime === song.duration && buttonRepeatState === true) {
+        song.removeEventListener("ended", skipForNextSong);
+        song.addEventListener("ended", function repeat() {
+            if (repeatSongBtn.classList.contains("button-activated")) {
                 song.currentTime = 0;
-                console.log("repeat");
                 song.play();
+            } else {
+                song.removeEventListener("ended", repeat);
+                song.addEventListener("ended", skipForNextSong);
             }
         });
         return;
