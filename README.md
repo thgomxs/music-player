@@ -33,8 +33,8 @@ Esta página é a minha ideia criativa e interativa de um player de músicas, pr
    <td>Teste no MOBILE</td>
  </tr>
  <tr>
-   <td><img src="https://user-images.githubusercontent.com/98625860/158075029-163be2de-c5bf-495b-82ed-18d44f91cb4e.gif" width="600px"></td>
-   <td><img src="https://user-images.githubusercontent.com/98625860/158075025-e5f8bfc7-7129-466c-9233-af985119ea50.gif" width="400px"></td>
+   <td><img src="https://user-images.githubusercontent.com/98625860/158075029-163be2de-c5bf-495b-82ed-18d44f91cb4e.gif" width="450px"></td>
+   <td><img src="https://user-images.githubusercontent.com/98625860/158075025-e5f8bfc7-7129-466c-9233-af985119ea50.gif" width="300px"></td>
  </tr>
  <tr>
    <td>Modo Claro</td>
@@ -45,8 +45,8 @@ Esta página é a minha ideia criativa e interativa de um player de músicas, pr
    <td>Teste no MOBILE</td>
  </tr>
   <tr>
-   <td><img src="https://user-images.githubusercontent.com/98625860/158075027-0bcd81cb-3747-4472-b0e4-e0bdd5d74ae1.gif" width="600px"></td>
-   <td><img src="https://user-images.githubusercontent.com/98625860/158075023-cf59af54-e98f-4c90-bcdc-3542fc150114.gif" width="400px"></td>
+   <td><img src="https://user-images.githubusercontent.com/98625860/158075027-0bcd81cb-3747-4472-b0e4-e0bdd5d74ae1.gif" width="450px"></td>
+   <td><img src="https://user-images.githubusercontent.com/98625860/158075023-cf59af54-e98f-4c90-bcdc-3542fc150114.gif" width="300px"></td>
  </tr>
 </table>
 
