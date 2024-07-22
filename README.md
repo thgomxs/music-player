@@ -12,7 +12,7 @@
 </p>
 
 <p>
-Esta página é a minha ideia criativa e interativa de um player de músicas, projeto proposto no curso de programação full stack do Igor Oliveira (ProgramadorBR)
+Esta página é a minha ideia criativa e interativa de um player de músicas.
 </p>
 
 <p align="center">
